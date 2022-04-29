@@ -48,6 +48,7 @@ public final class Chat extends JavaPlugin {
         getLogger().info("Спасибо За использование");
         saveDefaultConfig();
         saveResource("users.yml",false);
+        saveResource("message.yml",false);
     }
 
     @Override
