@@ -1,0 +1,72 @@
+name: Chat
+version: '${project.version}'
+main: chat.chat.Chat
+api-version: 1.17
+authors: [ Guevin1 ]
+softdepend: [ PlaceholderAPI ]
+description: Chat For bloxen
+commands:
+  do:
+    description: do
+    permission: BC.do
+    usage: /do <Message>
+  me:
+    description: test
+    permission: BC.me
+    usage: /me <Message>
+  w:
+    description: test
+    permission: BC.w
+    usage: /w <Player> <Message>
+  msg:
+    description: test
+    permission: BC.w
+    usage: /msg <Player> <Message>
+  tell:
+    description: test
+    permission: BC.w
+    usage: /tell <Player> <Message>
+  test:
+    description: test
+    permission: BC.w
+    usage: /me <Message>
+  spy:
+    description: test
+    permission: BC.spy
+    usage: /spy
+  unmutec:
+    description: test
+    permission: BC.unmute
+    usage: /unmutec <player>
+  mutec:
+    description: test
+    permission: BC.mute
+    usage: /mutec <player>
+  color-chat:
+    description: Color's chat
+    permission: BC.color
+    usage: /color-chat
+  hide-name:
+    description: Hide nicname to the server
+    permission: BC.hide
+    usage: /hide-name
+  new-nick:
+    description: Two nicknames to the server
+    permission: BC.nick
+    usage: /new-nick <nick>
+  change-chat:
+    description: Change-chat
+    permission: BC.change
+    usage: /change-chat
+  tempmutec:
+    description: tempmute
+    permission: BC.tempmute
+    usage: /tempmute <player> <secs>
+  try:
+    description: try
+    permission: BC.try
+    usage: /try <message>
+  debug:
+    description: debug
+    permission: BC.debug
+    usage: /debug

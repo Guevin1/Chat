@@ -1,0 +1,4 @@
+options:
+  prefix: "%luckperms_prefix% "
+  suffix: "%luckperms_suffix%"
+  deaths: true

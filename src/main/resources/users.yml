@@ -1,0 +1,8 @@
+Guevin1:
+  spy: true
+  color: true
+  mute: false
+  debug: true
+  nick:
+    name: "гуевин"
+    hide: true
