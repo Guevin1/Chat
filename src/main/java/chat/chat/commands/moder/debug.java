@@ -21,16 +21,17 @@ public class debug implements CommandExecutor {
     public boolean onCommand(CommandSender se,Command command,String label,String[] args) {
         if (se instanceof Player) {
             Player p = (Player) se;
-            if (se.hasPermission("bc.hide")) {
+            if (se.hasPermission("bc.debug")) {
                 File c_file = new File("plugins/Chat/users.yml");
                 FileConfiguration config = YamlConfiguration.loadConfiguration(c_file);
-                boolean spy = config.getBoolean(p.getName() + ".debug");
-                String message = ChatColor.GREEN + "Включён";
+                String c_l = ".debug";
+                boolean spy = config.getBoolean(p.getName() + c_l);
+                String message = ChatColor.RED + "Выключен";
                 if (spy) {
-                    config.set(p.getName() + ".nick.hide", false);
+                    config.set(p.getName() + c_l, false);
                 } else {
-                    config.set(p.getName() + ".nick.hide", true);
-                    message = ChatColor.RED + "Выключен";
+                    config.set(p.getName() + c_l, true);
+                    message = ChatColor.GREEN + "Включен";
                 }
                 se.sendMessage(ChatColor.GRAY + "Дебаг " + message);
                 try {

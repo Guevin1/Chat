@@ -2,6 +2,7 @@ package chat.chat;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -52,6 +53,7 @@ public class Events implements Listener {
                 final_death = death_message_pl.get(rand_int_pl).toString().replace("<killer>",p.getKiller().getName());
             }
             final_death = final_death.replace("<player>",p.getName());
+            final_death = ChatColor.translateAlternateColorCodes('&',final_death);
             Component text = Component.text(ChatColor.RED + final_death).hoverEvent(death_original);
             e.deathMessage(text);
 

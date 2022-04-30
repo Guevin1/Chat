@@ -44,17 +44,7 @@ public class Handler implements Listener {
             String prefix = config.getString("options.prefix");
             String suffix = config.getString("options.suffix");
             if (config_u.getBoolean(pla.getName() + ".color")) {
-                message_original = message_original.replace("&0",ChatColor.BLACK + "").replace("&1",ChatColor.DARK_BLUE + "");
-                message_original = message_original.replace("&2", ChatColor.DARK_GREEN + "").replace("&3", ChatColor.DARK_AQUA + "");
-                message_original = message_original.replace("&4", ChatColor.DARK_RED + "").replace("&5", ChatColor.DARK_PURPLE + "");
-                message_original = message_original.replace("&6", ChatColor.GOLD + "").replace("&7", ChatColor.GRAY + "");
-                message_original = message_original.replace("&8", ChatColor.DARK_GRAY + "").replace("&9",ChatColor.BLUE + "");
-                message_original = message_original.replace("&a",ChatColor.GREEN + "").replace("&b", ChatColor.AQUA + "");
-                message_original = message_original.replace("&c", ChatColor.RED + "").replace("&d", ChatColor.LIGHT_PURPLE + "");
-                message_original = message_original.replace("&e", ChatColor.YELLOW + "").replace("&f", ChatColor.WHITE + "");
-                message_original = message_original.replace("&k", ChatColor.MAGIC + "").replace("&l", ChatColor.BOLD + "");
-                message_original = message_original.replace("&m", ChatColor.STRIKETHROUGH + "").replace("&n",ChatColor.UNDERLINE + "");
-                message_original = message_original.replace("&o", ChatColor.ITALIC + "").replace("&r",ChatColor.RESET + "");
+                message_original = ChatColor.translateAlternateColorCodes('&',message_original);
             }
             String xyz = cmdf.getXYZ(pla);
             String L = pla.getLocation().getWorld().getName();
@@ -119,7 +109,7 @@ public class Handler implements Listener {
                         if (message_viewer.indexOf(spy_pl.getName()) == -1) {
                             Component spy_user = Component.text(ChatColor.GRAY + "" + ChatColor.ITALIC + "[L] ");
                             if(config_u.getBoolean(spy_pl.getName() + ".debug")){
-                                spy_pl.sendMessage(local.append(nameHC.hoverEvent(Component.text(cmdf.hoverDebugPlayer(pla)))).append(messageg));
+                                spy_pl.sendMessage(spy_user.append(nameHC.hoverEvent(Component.text(cmdf.hoverDebugPlayer(pla)))).append(messageg));
                             }else {
                                 spy_pl.sendMessage(spy_user.append(nameHC).append(messageg));
                             }
