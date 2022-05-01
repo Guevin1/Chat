@@ -24,15 +24,16 @@ public class local implements CommandExecutor {
             if (se.hasPermission("bc.local")) {
                 File c_file = new File("plugins/Chat/users.yml");
                 FileConfiguration config = YamlConfiguration.loadConfiguration(c_file);
-                String spy = config.getString(p.getName() + ".local");
-                String spy_message = "Локальном";
-                if (spy == "true") {
-                    config.set(p.getName() + ".local", false);
+                String c_l = ".local";
+                boolean c_b = config.getBoolean(p.getName() + c_l);
+                String message = ChatColor.GRAY + "Локальный";
+                if (c_b) {
+                    config.set(p.getName() + c_l, false);
                 } else {
-                    config.set(p.getName() + ".local", true);
-                    spy_message = ChatColor.GOLD + "Глобальном";
+                    config.set(p.getName() + c_l, true);
+                    message = ChatColor.GOLD + "Глобальном";
                 }
-                se.sendMessage(ChatColor.GRAY + "Вы теперь общаетесь в " + spy_message);
+                se.sendMessage(ChatColor.GRAY + "Вы общаетесь в " + message);
                 try {
                     config.save(c_file);
                 } catch (IOException e) {

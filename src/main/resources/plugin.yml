@@ -70,3 +70,7 @@ commands:
     description: debug
     permission: BC.debug
     usage: /debug
+  resetConfig:
+    description: NOT SEND THIS COMMAND
+    permission: BC.resetConfig
+    usage: /resetConfig

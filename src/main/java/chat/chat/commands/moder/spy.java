@@ -25,34 +25,20 @@ public class spy implements CommandExecutor {
             if (se.hasPermission("bc.spy")) {
                 File c_file = new File("plugins/Chat/users.yml");
                 FileConfiguration config = YamlConfiguration.loadConfiguration(c_file);
-                String spy = config.getString(p.getName() + ".spy");
-                if (spy != "") {
-                    String spy_message = ChatColor.RED + "Выключено";
-                    if (spy == "true") {
-                        config.set(p.getName() + ".spy", false);
-                        Bukkit.getLogger().info(config.getString(p.getName() + ".spy"));
-                    } else {
-                        config.set(p.getName() + ".spy", true);
-                        spy_message = ChatColor.GREEN + "Включено";
-                    }
-                    se.sendMessage(ChatColor.GRAY + "Прослушивание игроков " + spy_message);
-                    Bukkit.getPluginManager().getPlugin("Chat").reloadConfig();
-
-                    try {
-                        Bukkit.getLogger().info("Users.yml Saved");
-                        config.save(c_file);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }else {
-                    config.set(p.getName() + ".spy", true);
-                    se.sendMessage(ChatColor.GRAY + "Прослушивание игроков " + ChatColor.GREEN + "Включено");
-                    try {
-                        Bukkit.getLogger().info("Users.yml Saved");
-                        config.save(c_file);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                String c_l = ".spy";
+                boolean c_b = config.getBoolean(p.getName() + c_l);
+                String message = ChatColor.RED + "Выключен";
+                if (c_b) {
+                    config.set(p.getName() + c_l, false);
+                } else {
+                    config.set(p.getName() + c_l, true);
+                    message = ChatColor.GREEN + "Включен";
+                }
+                se.sendMessage(ChatColor.GRAY + "Прослушевание" + message + "о");
+                try {
+                    config.save(c_file);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
             }else {

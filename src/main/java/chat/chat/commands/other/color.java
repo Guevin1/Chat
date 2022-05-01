@@ -24,15 +24,16 @@ public class color implements CommandExecutor {
             if (se.hasPermission("bc.color")) {
                 File c_file = new File("plugins/Chat/users.yml");
                 FileConfiguration config = YamlConfiguration.loadConfiguration(c_file);
-                String spy = config.getString(p.getName() + ".color");
-                String spy_message = ChatColor.RED + "Выключен";
-                if (spy == "true") {
-                    config.set(p.getName() + ".color", false);
+                String c_l = ".color";
+                boolean c_b = config.getBoolean(p.getName() + c_l);
+                String message = ChatColor.RED + "Выключен";
+                if (c_b) {
+                    config.set(p.getName() + c_l, false);
                 } else {
-                    config.set(p.getName() + ".color", true);
-                    spy_message = ChatColor.GREEN + "Включён";
+                    config.set(p.getName() + c_l, true);
+                    message = ChatColor.GREEN + "Включен";
                 }
-                se.sendMessage(ChatColor.GRAY + "Цветной чатик " + spy_message);
+                se.sendMessage(ChatColor.GRAY + "Цветной чатик " + message);
                 try {
                     config.save(c_file);
                 } catch (IOException e) {
@@ -43,8 +44,6 @@ public class color implements CommandExecutor {
                 se.sendMessage(ChatColor.RED + "Вы не имеете прав");
             }
             return true;
-        }else {
-            se.sendMessage("Ты сервер ты и так читаешь всё");
         }
         return false;
     }

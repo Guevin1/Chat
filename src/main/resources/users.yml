@@ -1,6 +1,7 @@
 Guevin1:
   spy: true
   color: true
+  local: true
   mute: false
   debug: true
   nick:

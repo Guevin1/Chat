@@ -8,6 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,10 +24,19 @@ public class mute implements CommandExecutor {
             if (args.length == 0){
                 se.sendMessage(ChatColor.RED + "Укажите Пользователя");
             }else {
+
                 File c_file = new File("plugins/Chat/users.yml");
                 FileConfiguration config = YamlConfiguration.loadConfiguration(c_file);
-                config.set(args[0] + ".mute", true);
-                se.sendMessage(ChatColor.GRAY + "Человек " + ChatColor.DARK_GREEN + "Замучен");
+                if (args[0].equals("@a")) {
+                    for (Player p : Bukkit.getOnlinePlayers()){
+                        config.set(p.getName() + ".mute", true);
+                        se.sendMessage(ChatColor.GRAY + "Человек " + ChatColor.DARK_GREEN + "Замучен");
+                    }
+                }else {
+                    config.set(args[0] + ".mute", true);
+                    se.sendMessage(ChatColor.GRAY + "Человек " + ChatColor.DARK_GREEN + "Замучен");
+                }
+
                 Bukkit.getPluginManager().getPlugin("Chat").reloadConfig();
 
                 try {

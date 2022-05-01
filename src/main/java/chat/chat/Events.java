@@ -28,8 +28,16 @@ public class Events implements Listener {
 
     @EventHandler
     public void onChat(PlayerJoinEvent e) {
+        File u_file = new File("plugins/Chat/message.yml");
+        FileConfiguration config_m = YamlConfiguration.loadConfiguration(u_file);
+        List join = config_m.getList("join_to");
+        Random rand = new Random();
+        int rand_int = rand.nextInt(join.size());
+        String final_join = join.get(rand_int).toString();
+        final_join = final_join.replace("<player>", e.getPlayer().getName());
+        final_join = ChatColor.translateAlternateColorCodes('&',final_join);
         Player p = e.getPlayer();
-        Component text = Component.text(ChatColor.YELLOW + e.getPlayer().getName() + " залетел на сервер");
+        Component text = Component.text(ChatColor.YELLOW + final_join);
         text = text.hoverEvent(HoverEvent.showText(Component.text(cmdf.hoverPlayer(p)))).clickEvent(suggestCommand("/w " + p.getName()));
         e.joinMessage(text);
     }
@@ -37,15 +45,14 @@ public class Events implements Listener {
     public void onDeath(PlayerDeathEvent e) {
         FileConfiguration config = Chat.getInstance().getConfig();
         File u_file = new File("plugins/Chat/message.yml");
-        FileConfiguration config_d = YamlConfiguration.loadConfiguration(u_file);
+        FileConfiguration config_m = YamlConfiguration.loadConfiguration(u_file);
         if (config.getBoolean("options.deaths")) {
             Component death_original = e.deathMessage();
             Player p = e.getPlayer();
-            List death_message_no = config_d.getList("deaths_player");
-            List death_message_pl = config_d.getList("deaths_from_player");
-            //String[] death_message_no = {"Полетел в рай", "Спустился в ад", "Не смог избежать смерти", "Был рассыплен впрах", "Разрушен окончательно", "Сдох", "Принял свою участь", "Рассечён жестокой реальностью"};
-            //String[] death_message_pl = {"<player> Не увернулся и получил последний удар от <killer>","<killer> свершил последнюю волю <player>","<killer> был единственным свидетелем смерти <player>","<killer> последним ударом отсёк голову <player>"};
+            List death_message_no = config_m.getList("deaths_player");
+            List death_message_pl = config_m.getList("deaths_from_player");
             Random rand = new Random();
+
             int rand_int = rand.nextInt(death_message_no.size());
             int rand_int_pl = rand.nextInt(death_message_pl.size());
             String final_death = (String) death_message_no.get(rand_int);
