@@ -1,4 +1,8 @@
 options:
-  prefix: "%luckperms_prefix% "
-  suffix: "%luckperms_suffix%"
   deaths: true
+  global: # Все сообщения совместимы с PlaceholderApi кроме смертей
+    standart: "&6 G |&7 %luckperms_prefix%&r {player} %luckperms_suffix%"
+    anom: "&6 G |&7 %luckperms_prefix%"
+  local:
+    standart: "&7 L |&7 %luckperms_prefix% {player} %luckperms_suffix%"
+    anom: "&7 L |&r %luckperms_prefix%"

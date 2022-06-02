@@ -31,20 +31,20 @@ public class tempmute implements CommandExecutor {
                 File c_file = new File("plugins/Chat/users.yml");
                 FileConfiguration config = YamlConfiguration.loadConfiguration(c_file);
                 config.set(args[0] + ".mute", true);
-                se.sendMessage(ChatColor.GRAY + "Человек " + ChatColor.DARK_GREEN + "Замучен");
                 try {
                     config.save(c_file);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Bukkit.getScheduler().scheduleSyncDelayedTask(Chat.getInstance(),() -> {
+                se.sendMessage(ChatColor.GRAY + "Человек " + ChatColor.DARK_GREEN + "Замучен");
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Chat.getInstance(), () -> {
                     config.set(args[0] + ".mute", false);
                     try {
                         config.save(c_file);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                },Integer.parseInt(args[1]) * 20);
+                }, Integer.parseInt(args[1]) * 20);
             }
 
         }else {

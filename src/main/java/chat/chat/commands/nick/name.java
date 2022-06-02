@@ -22,7 +22,7 @@ public class name implements CommandExecutor {
         if (se instanceof Player) {
             Player p = (Player) se;
             if (args.length == 1) {
-                if (se.hasPermission("bc.name")) {
+                if (se.hasPermission("bc.nick")) {
                     File c_file = new File("plugins/Chat/users.yml");
                     FileConfiguration config = YamlConfiguration.loadConfiguration(c_file);
                     se.sendMessage(ChatColor.GRAY + "Ваше второе имя " + args[0]);

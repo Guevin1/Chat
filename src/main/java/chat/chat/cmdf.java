@@ -44,7 +44,7 @@ public class cmdf {
         FileConfiguration config = YamlConfiguration.loadConfiguration(u_file);
         String name = pl.getName();
         String message = ChatColor.GRAY + "Версия: %viaversion_player_protocol_version%\n" +  "spy: " + config.getBoolean(pl.getName() + ".spy") + " \ncolor: "
-                + config.getBoolean(name + ".color") + "\nmute: " + config.getBoolean(name + ".mute") + "\nAnom: " + config.getBoolean(name + ".nick.hide");
+                + config.getBoolean(name + ".color") + "\nmute: " + config.getBoolean(name + ".mute") + "\nAnom: " + config.getBoolean(name + ".nick.hide")  + "\nPing: " + pl.getPing();
         message = PlaceholderAPI.setPlaceholders(pl,message);
         return message;
     }

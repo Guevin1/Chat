@@ -21,7 +21,7 @@ public class local implements CommandExecutor {
     public boolean onCommand(CommandSender se,Command command,String label,String[] args) {
         if (se instanceof Player) {
             Player p = (Player) se;
-            if (se.hasPermission("bc.local")) {
+            if (se.hasPermission("bc.change")) {
                 File c_file = new File("plugins/Chat/users.yml");
                 FileConfiguration config = YamlConfiguration.loadConfiguration(c_file);
                 String c_l = ".local";
