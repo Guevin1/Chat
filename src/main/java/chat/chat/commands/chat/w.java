@@ -48,7 +48,7 @@ public class w implements CommandExecutor {
                 boolean message_the_player = true;
                 for (Player player_list : Bukkit.getOnlinePlayers()) {
                     // pl.sendMessage("Args: " + args[0] + " Players: " + player_list.getName());
-                    if (player_list.getName().equals(args[0])) {
+                    if (player_list.getName().equalsIgnoreCase(args[0])) {
                         String xyz;
                         if (user_name.equals("Server")){
                             xyz = ChatColor.BLUE + "Кординаты не найдены";
@@ -73,8 +73,12 @@ public class w implements CommandExecutor {
                         for (Player p : Bukkit.getOnlinePlayers()){
                             File c_file = new File("plugins/Chat/users.yml");
                             FileConfiguration config = YamlConfiguration.loadConfiguration(c_file);
+                            File Cfile = new File("plugins/Chat/config.yml");
+                            FileConfiguration Cconfig = YamlConfiguration.loadConfiguration(Cfile);
+                            String SpyFormat = Cconfig.getString("message.spy.pm");
+                            SpyFormat = ChatColor.translateAlternateColorCodes('&',SpyFormat);
                             if(config.getString(p.getName() + ".spy") == "true" && user.getName() != p.getName() && user_name != p.getName()){
-                                Component spy_user = Component.text(ChatColor.GRAY + "" + ChatColor.ITALIC + "[" + user_name + " > " + user.getName() + "]");
+                                Component spy_user = Component.text(SpyFormat.replace("{PlayerSend}", user_name).replace("{PlayerGets}", user.getName()));
                                 p.sendMessage(spy_user.append(messageP));
                             }
                         }

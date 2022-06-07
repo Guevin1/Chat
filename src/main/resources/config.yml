@@ -1,8 +1,17 @@
 options:
   deaths: true
+
+
+message:
   global: # Все сообщения совместимы с PlaceholderApi кроме смертей
-    standart: "&6 G |&7 %luckperms_prefix%&r {player} %luckperms_suffix%"
+    standart: "&6 G |&7 %luckperms_prefix%&r {player}%luckperms_suffix%"
     anom: "&6 G |&7 %luckperms_prefix%"
   local:
-    standart: "&7 L |&7 %luckperms_prefix% {player} %luckperms_suffix%"
-    anom: "&7 L |&r %luckperms_prefix%"
+    standart: "&7 L |&7 %luckperms_prefix%&r {player}%luckperms_suffix%"
+    anom: "&7 L |&7 %luckperms_prefix%"
+
+  spy:
+    local:
+     standart: " &7[L] &7 %luckperms_prefix%&r {player}%luckperms_suffix%"
+     anom: "&7 [L] |&7 %luckperms_prefix%"
+    pm: "[{PlayerSend} > {PlayerGets}]" # PlayerSend - Кто отправляет PlayerGets - Кто получил

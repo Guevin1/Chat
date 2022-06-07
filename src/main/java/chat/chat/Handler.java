@@ -34,7 +34,7 @@ public class Handler implements Listener {
     public void onChat(AsyncChatEvent e) {
 
         String MessageOriginal = PlainTextComponentSerializer.plainText().serialize(e.message());
-
+        Bukkit.getLogger().info(MessageOriginal);
         Player pla = e.getPlayer();
         File u_file = new File("plugins/Chat/users.yml");
         FileConfiguration config_u = YamlConfiguration.loadConfiguration(u_file);
@@ -53,15 +53,17 @@ public class Handler implements Listener {
             }
 
             // Local and Global
-            String GlobalFormat = config.getString("options.global." + IsAnomFormat).replace("{player}",pla.getName());
-            String LocalFormat = config.getString("options.local." + IsAnomFormat).replace("{player}",pla.getName());
+            String GlobalFormat = config.getString("message.global." + IsAnomFormat).replace("{player}",pla.getName());
+            String LocalFormat = config.getString("message.local." + IsAnomFormat).replace("{player}",pla.getName());
+            String SpyFormat = config.getString("message.spy.local." + IsAnomFormat).replace("{player}",pla.getName());
             // PlaceholderApi превращение Placeholders в текст
             GlobalFormat = PlaceholderAPI.setPlaceholders(pla, GlobalFormat);
             LocalFormat = PlaceholderAPI.setPlaceholders(pla, LocalFormat);
+            SpyFormat = PlaceholderAPI.setPlaceholders(pla, SpyFormat);
             // Chat's format
             Component Global = Component.text(GlobalFormat).hoverEvent(HoverEvent.showText(Component.text(cmdf.hoverPlayer(pla)))).clickEvent(suggestCommand("/w " + pla.getName()));
             Component Local = Component.text(LocalFormat).hoverEvent(HoverEvent.showText(Component.text(cmdf.hoverPlayer(pla)))).clickEvent(suggestCommand("/w " + pla.getName()));
-
+            Component Spy = Component.text(SpyFormat).hoverEvent(HoverEvent.showText(Component.text(cmdf.hoverPlayer(pla)))).clickEvent(suggestCommand("/w " + pla.getName()));
 
             // mention
             String user_oper = "abco01";
@@ -112,11 +114,10 @@ public class Handler implements Listener {
                 for (Player spy_pl : Bukkit.getOnlinePlayers()) {
                     if (config_u.getBoolean(spy_pl.getName() + ".spy")) {
                         if (message_viewer.indexOf(spy_pl.getName()) == -1) {
-                            Component spy_user = Component.text(ChatColor.GRAY + "" + ChatColor.ITALIC + "[L] ");
                             if(config_u.getBoolean(spy_pl.getName() + ".debug")){
-                                spy_pl.sendMessage(spy_user.append(Local.hoverEvent(Component.text(cmdf.hoverDebugPlayer(pla)))).append(messageg));
+                                spy_pl.sendMessage(Spy.hoverEvent(Component.text(cmdf.hoverDebugPlayer(pla))).append(messageg));
                             }else {
-                                spy_pl.sendMessage(spy_user.append(Local).append(messageg));
+                                spy_pl.sendMessage(Spy.append(messageg));
                             }
                         }
                     }

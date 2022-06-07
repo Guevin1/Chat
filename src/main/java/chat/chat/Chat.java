@@ -7,6 +7,7 @@ import chat.chat.commands.chat.w;
 import chat.chat.commands.moder.*;
 import chat.chat.commands.nick.hide;
 import chat.chat.commands.nick.name;
+import chat.chat.commands.other.ChatGui;
 import chat.chat.commands.other.ResapwnConfig;
 import chat.chat.commands.other.color;
 import chat.chat.commands.other.local;
