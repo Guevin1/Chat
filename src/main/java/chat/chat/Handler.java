@@ -1,5 +1,6 @@
 package chat.chat;
 
+import chat.chat.other.HEX;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
@@ -40,13 +41,12 @@ public class Handler implements Listener {
         FileConfiguration config_u = YamlConfiguration.loadConfiguration(u_file);
         File c_file = new File("plugins/Chat/config.yml");
         FileConfiguration config = YamlConfiguration.loadConfiguration(c_file);
-        if (config_u.getBoolean(pla.getName() + ".mute") == false) {
+        if (!config_u.getBoolean(pla.getName() + ".mute")) {
             if (config_u.getBoolean(pla.getName() + ".color")) {
                 MessageOriginal = ChatColor.translateAlternateColorCodes('&',MessageOriginal);
             }
             String xyz = cmdf.getXYZ(pla);
             String L = pla.getLocation().getWorld().getName();
-
             String IsAnomFormat = "standart";
             if (config_u.getBoolean(pla.getName() + ".nick.hide")) {
                 IsAnomFormat = "anom";
@@ -64,6 +64,7 @@ public class Handler implements Listener {
             Component Global = Component.text(GlobalFormat).hoverEvent(HoverEvent.showText(Component.text(cmdf.hoverPlayer(pla)))).clickEvent(suggestCommand("/w " + pla.getName()));
             Component Local = Component.text(LocalFormat).hoverEvent(HoverEvent.showText(Component.text(cmdf.hoverPlayer(pla)))).clickEvent(suggestCommand("/w " + pla.getName()));
             Component Spy = Component.text(SpyFormat).hoverEvent(HoverEvent.showText(Component.text(cmdf.hoverPlayer(pla)))).clickEvent(suggestCommand("/w " + pla.getName()));
+
 
             // mention
             String user_oper = "abco01";

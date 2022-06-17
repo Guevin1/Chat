@@ -15,6 +15,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.util.List;
+import java.util.UUID;
 
 import static net.kyori.adventure.text.event.ClickEvent.suggestCommand;
 
@@ -26,6 +28,8 @@ public class w implements CommandExecutor {
     }
     @Override
     public boolean onCommand(CommandSender se, Command cmd, String arg, String[] args) {
+        File Data = new File("plugins/SuperVanish/data.yml");
+        FileConfiguration DataConfig = YamlConfiguration.loadConfiguration(Data);
         String user_name = "Server";
         if (se instanceof Player) {
             Player pl = (Player) se;
@@ -47,8 +51,10 @@ public class w implements CommandExecutor {
                 }
                 boolean message_the_player = true;
                 for (Player player_list : Bukkit.getOnlinePlayers()) {
+                    String UUID = String.valueOf(player_list.getUniqueId());
+                    List InvisiblePlayer = DataConfig.getStringList("InvisiblePlayers");
                     // pl.sendMessage("Args: " + args[0] + " Players: " + player_list.getName());
-                    if (player_list.getName().equalsIgnoreCase(args[0])) {
+                    if (player_list.getName().equalsIgnoreCase(args[0]) && !InvisiblePlayer.contains(UUID)) {
                         String xyz;
                         if (user_name.equals("Server")){
                             xyz = ChatColor.BLUE + "Кординаты не найдены";

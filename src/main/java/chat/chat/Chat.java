@@ -5,15 +5,14 @@ import chat.chat.commands.chat.me;
 import chat.chat.commands.chat.rand;
 import chat.chat.commands.chat.w;
 import chat.chat.commands.moder.*;
+import chat.chat.commands.nick.alias;
 import chat.chat.commands.nick.hide;
 import chat.chat.commands.nick.name;
-import chat.chat.commands.other.ChatGui;
 import chat.chat.commands.other.ResapwnConfig;
 import chat.chat.commands.other.color;
 import chat.chat.commands.other.local;
 import chat.chat.commands.test;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Chat extends JavaPlugin {
@@ -42,6 +41,7 @@ public final class Chat extends JavaPlugin {
         getCommand("tempmutec").setExecutor(new tempmute(this));
         getCommand("debug").setExecutor(new debug(this));
         getCommand("resetConfig").setExecutor(new ResapwnConfig(this));
+        getCommand("alias").setExecutor(new alias(this));
         getLogger().info("Plugin Started!");
         getLogger().info("Спасибо За использование");
         saveDefaultConfig();
