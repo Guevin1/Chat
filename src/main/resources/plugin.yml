@@ -74,7 +74,11 @@ commands:
     description: NOT SEND THIS COMMAND
     permission: BC.resetConfig
     usage: /resetConfig
-  alias:
-    description: NOT SEND THIS COMMAND
-    permission: BC.nick
-    usage: /alias <newnick> <Player>
+  block:
+    description: Block the user
+    permission: BC.block
+    usage: /block <nick>
+  unblock:
+    description: unblock the user
+    permission: BC.unblock
+    usage: /unblock <nick>

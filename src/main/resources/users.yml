@@ -7,3 +7,5 @@ Guevin1:
   nick:
     name: "гуевин"
     hide: true
+  blocked:
+    - DayGo444

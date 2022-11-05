@@ -9,6 +9,10 @@ message:
   local:
     standart: "&7 L |&7 %luckperms_prefix%&r {player}%luckperms_suffix%"
     anom: "&7 L |&7 %luckperms_prefix%"
+  pm:
+    from: "&7&o> [Личные сообщения с {user_from}] {message}"
+    to: "&7&o< [Личные сообщения с {user_to}] {message}"
+
 
   spy:
     local:

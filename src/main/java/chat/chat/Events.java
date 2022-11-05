@@ -4,6 +4,7 @@ import chat.chat.other.GUI;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -69,7 +70,8 @@ public class Events implements Listener {
             final_death = ChatColor.translateAlternateColorCodes('&',final_death);
             Component text = Component.text(ChatColor.RED + final_death).hoverEvent(death_original);
             e.deathMessage(text);
-
+            String death = PlainTextComponentSerializer.plainText().serialize(death_original);
+            Bukkit.getLogger().info(death);
         }
     }
     /*

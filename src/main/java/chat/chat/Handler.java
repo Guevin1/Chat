@@ -1,12 +1,15 @@
 package chat.chat;
 
 import chat.chat.other.HEX;
+import chat.chat.other.RGB;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -33,8 +36,9 @@ public class Handler implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onChat(AsyncChatEvent e) {
-
         String MessageOriginal = PlainTextComponentSerializer.plainText().serialize(e.message());
+
+        MessageOriginal = PlainTextComponentSerializer.plainText().serialize(RGB.translate(MessageOriginal));
         Bukkit.getLogger().info(MessageOriginal);
         Player pla = e.getPlayer();
         File u_file = new File("plugins/Chat/users.yml");
@@ -54,17 +58,23 @@ public class Handler implements Listener {
 
             // Local and Global
             String GlobalFormat = config.getString("message.global." + IsAnomFormat).replace("{player}",pla.getName());
-            String LocalFormat = config.getString("message.local." + IsAnomFormat).replace("{player}",pla.getName());
-            String SpyFormat = config.getString("message.spy.local." + IsAnomFormat).replace("{player}",pla.getName());
+            String LocalFormat = config.getString("message.local." + IsAnomFormat).replace("{player}", pla.getName());
+            String SpyFormat = config.getString("message.spy.local." + IsAnomFormat).replace("{player}", pla.getName());
+
             // PlaceholderApi превращение Placeholders в текст
             GlobalFormat = PlaceholderAPI.setPlaceholders(pla, GlobalFormat);
             LocalFormat = PlaceholderAPI.setPlaceholders(pla, LocalFormat);
             SpyFormat = PlaceholderAPI.setPlaceholders(pla, SpyFormat);
             // Chat's format
-            Component Global = Component.text(GlobalFormat).hoverEvent(HoverEvent.showText(Component.text(cmdf.hoverPlayer(pla)))).clickEvent(suggestCommand("/w " + pla.getName()));
-            Component Local = Component.text(LocalFormat).hoverEvent(HoverEvent.showText(Component.text(cmdf.hoverPlayer(pla)))).clickEvent(suggestCommand("/w " + pla.getName()));
-            Component Spy = Component.text(SpyFormat).hoverEvent(HoverEvent.showText(Component.text(cmdf.hoverPlayer(pla)))).clickEvent(suggestCommand("/w " + pla.getName()));
+            // ColorChat
+            GlobalFormat = ChatColor.translateAlternateColorCodes('&',GlobalFormat);
+            LocalFormat = ChatColor.translateAlternateColorCodes('&',LocalFormat);
+            SpyFormat = ChatColor.translateAlternateColorCodes('&',SpyFormat);
 
+            // Hover
+            Component Global = RGB.translate(GlobalFormat).hoverEvent(HoverEvent.showText(Component.text(cmdf.hoverPlayer(pla)))).clickEvent(suggestCommand("/w " + pla.getName()));
+            Component Local = RGB.translate(LocalFormat).hoverEvent(HoverEvent.showText(Component.text(cmdf.hoverPlayer(pla)))).clickEvent(suggestCommand("/w " + pla.getName()));
+            Component Spy = RGB.translate(SpyFormat).hoverEvent(HoverEvent.showText(Component.text(cmdf.hoverPlayer(pla)))).clickEvent(suggestCommand("/w " + pla.getName()));
 
             // mention
             String user_oper = "abco01";
@@ -73,11 +83,11 @@ public class Handler implements Listener {
                 if (config_u.getString(p.getName() + ".nick.name") != null) {
                     nick_two = config_u.getString(p.getName() + ".nick.name");
                 }
-                if (MessageOriginal.indexOf(p.getName()) != -1) {
+                if (MessageOriginal.indexOf("@"+p.getName()) != -1) {
 
                     user_oper = p.getName();
                     p.playSound(p.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_HIT, 1, 1);
-                }if (MessageOriginal.indexOf(nick_two) != -1) {
+                }if (MessageOriginal.indexOf("@"+nick_two) != -1) {
                     user_oper = nick_two;
                     p.playSound(p.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_HIT, 1, 1);
                 }
@@ -85,7 +95,7 @@ public class Handler implements Listener {
 
             // Formation
             String replace = MessageOriginal.replace(":xyz:", xyz).replace(":loc:", xyz);
-            Component messageg = Component.text(": " + replace.replaceFirst("! ", "").replaceFirst("!", "").replace(user_oper, ChatColor.GREEN + user_oper + ChatColor.RESET));
+            Component messageg = Component.text(": " + replace.replaceFirst("! ", "").replaceFirst("!", "").replace("@"+user_oper, ChatColor.GREEN +"@"+user_oper + ChatColor.RESET));
             e.message(Component.text(replace.replaceFirst("! ","").replaceFirst("!","")));
             // toggle Global
             boolean global_prefix = MessageOriginal.startsWith("!");
