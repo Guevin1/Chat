@@ -52,7 +52,5 @@ public final class Chat extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
     }
-    public static Chat getInstance(){
-        return instance
-                lox_i_pidor
+    public static Chat getInstance(){return instance;}
 }
