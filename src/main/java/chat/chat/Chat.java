@@ -21,7 +21,7 @@ public final class Chat extends JavaPlugin {
         instance = this;
         Bukkit.getPluginManager().registerEvents(new Handler(this),this);
         Bukkit.getPluginManager().registerEvents(new Events(this),this);
-        getLogger().info("сима ddлох");
+        getLogger().info("сима ddлfох");
         getCommand("do").setExecutor(new dof(this));
         getCommand("me").setExecutor(new me(this));
         getCommand("w").setExecutor(new w(this));
