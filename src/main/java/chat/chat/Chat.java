@@ -53,7 +53,6 @@ public final class Chat extends JavaPlugin {
         // Plugin shutdown logic
     }
     public static Chat getInstance(){
-        return instance;
-    }
-
+        return instance
+                lox_i_pidor
 }
