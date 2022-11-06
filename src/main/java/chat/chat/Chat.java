@@ -5,11 +5,11 @@ import chat.chat.commands.chat.me;
 import chat.chat.commands.chat.rand;
 import chat.chat.commands.chat.w;
 import chat.chat.commands.moder.*;
-import chat.chat.commands.nick.alias;
 import chat.chat.commands.nick.hide;
 import chat.chat.commands.nick.name;
 import chat.chat.commands.other.*;
 import chat.chat.commands.test;
+import chat.chat.old.Events;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -44,8 +44,8 @@ public final class Chat extends JavaPlugin {
         getLogger().info("Plugin Started!");
         getLogger().info("Спасибо За использование");
         saveDefaultConfig();
-        saveResource("users.yml",false);
-        saveResource("message.yml",false);
+        saveResource("old/users.yml",false);
+        saveResource("old/message.yml",false);
     }
 
     @Override
