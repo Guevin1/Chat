@@ -1,0 +1,65 @@
+plugin:
+  format:
+    global:
+      message: "&l&6 G |&r :name:: :message:" # :name: - имя игрока :message: сообщение игрока
+      hover: # что покажет при наводке на сообщение
+        - "Версия: %viaversion_player_protocol_version%"
+      click: "/w :name:" # команда когда клинут по сообщению
+    local:
+      message: "&l&7 L |&r :name:: :message:" # :name: - имя игрока :message: сообщение игрока
+      hover: # что покажет при наводке на сообщение
+        - "Версия: %viaversion_player_protocol_version%\n"
+        - ":blocks: блок(а/ax) от вас"
+      click: "/w :name:" # команда когда клинут по сообщению
+    spy_local:
+      message: "&l&8 L |&r :name:: :message:" # :name: - имя игрока :message: сообщение игрока
+      hover: # что покажет при наводке на сообщение
+        - "Версия: %viaversion_player_protocol_version%\n"
+        - ":blocks: блок(а/ax) от вас"
+      click: "/w :name:" # команда когда клинут по сообщению
+    rp:
+      message: "&l&6 R&fP &7|&r :displayname:: :message:" # :displayname: - имя и фамилия игрока :message: сообщение игрока
+      hover: # что покажет при наводке на сообщение
+        - "ФИО: :displayname: \n"
+        - ":blocks: блок(а/ax) от вас"
+      click: "/w :name:" # команда когда клинут по сообщению
+    spy_rp:
+      message: "&l&c R&6P &7|&r :displayname:: :message:" # :displayname: - имя и фамилия игрока :message: сообщение игрока
+      hover: # что покажет при наводке на сообщение
+        - "ФИО: :displayname: \n"
+        - ":blocks: блок(а/ax) от вас"
+      click: "/w :name: хочешь суну пальчик в жопу" # команда когда клинут по сообщению
+    commands:
+      access:
+        me:
+          text: "&7* :message:(:displayname:)"
+          spy: "&8* :message:(:displayname:)"
+        w:
+          to: "&b Для&r :name:::message:"
+          from: "&b От&r :name:::message:"
+          spy: "&b От &r:name:&b Для &r:name2:: :message:"
+        do: "&i:name: :message:"
+        spy:
+          text: "&a spy :spy:" # :spy: это режим
+          true: "вкл"
+          false: "выкл"
+      errors:
+        me-arg: "&c Напишите сообщение"
+        w:
+          arg-name: "&c Напишите имя"
+          arg-message: "&c Напишите сообщение"
+          arg-online: "&c Человек либо вне сети либо нету"
+        do-arg: "&c не хватает аргументов"
+
+    sub:
+      loc:
+        format:
+          - ":loc:"
+          - ":xyz:"
+        message: ":color-world:[:world: x::x: y::y: z::z:]&r"
+        # :color-world: 3 цвета будет зелёный - стандартный / это обычный мир; красный - это ад; фиолетовый это энд
+      mentoin:
+        format:
+          - "@:name:"
+          - ":name:"
+        message: "&a@:name:&r"

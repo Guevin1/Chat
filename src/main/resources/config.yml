@@ -1,0 +1,18 @@
+plugin:
+  global:
+    prefix: "!"
+  local:
+    radius: 100
+    sis: true # SPY это видет?
+  rp:
+    prefix: ":"
+    chat:
+      radius: 25
+      sis: false # SPY это видет?
+    cmd:
+      me:
+        radius: 25
+        sis: false
+      do:
+        radius: 25
+        sis: false
