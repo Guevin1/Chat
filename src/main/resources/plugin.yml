@@ -1,23 +1,27 @@
-name: Chat
+name: ChatGE
 version: '${project.version}'
 main: guevin1.chat.main
 api-version: 1.17
-authors: [ Guevin1 ]
+authors: [ Guevin1,ChatGPT ]
 softdepend: [ PlaceholderAPI ]
 description: Chat For bloxen
 commands:
   w:
     description: w
-    permission: chat.w
+    permission: chatge.w
     aliases:
       - msg
       - tell
     usage: /w <player> <Message>
   spy:
     description: spy
-    permission: chat.spy
+    permission: chatge.spy
     usage: /spy
   me:
     description: me
-    permission: chat.me
+    permission: chatge.me
     usage: /me <message>
+  groups:
+    description: groups
+    permission: chatge.groups
+    usage: /groups <args>

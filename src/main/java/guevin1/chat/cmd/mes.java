@@ -24,32 +24,34 @@ public class mes implements CommandExecutor {
             se.sendMessage(message);
         } else {
             if (se instanceof Player){
-                String message = "";
-                for(int ml = 0;ml <= args.length-1; ml++){
-                    message = message + " "+args[ml];
-                }
+                String message = cmdf.SA2S(0,args);
                 String formatMessage = "";
                 Player p = (Player) se;
                 message = cmdf.textToSub(message,p);
                 String display = PlainTextComponentSerializer.plainText().serialize(p.displayName());
                 for (Player p2 : Bukkit.getOnlinePlayers()) {
                     if (p2.getWorld().getUID() == p.getWorld().getUID() && p.getLocation().distance(p2.getLocation()) <= main.config.getInt("plugin.rp.cmd.me.radius")) {
-                        formatMessage = format.getString("plugin.format.commands.access.me.text")
+                        formatMessage = cmdf.C2T(format, "plugin.format.commands.access.me.text")
                                 .replace(":name:", p.getName())
                                 .replace(":displayname:", p.getName())
                                 .replace(":message:", message);
-                        formatMessage = ChatColor.translateAlternateColorCodes('&', formatMessage);
+                        if (se.hasPermission("chatge.color")){
+                            formatMessage = ChatColor.translateAlternateColorCodes('&',formatMessage);
+                        }
                         p2.sendMessage(formatMessage);
+
                     }
                 }
                 for (Player spy : Bukkit.getOnlinePlayers()) {
                     if (!spy.getName().equals(p.getName())) {
                         if (main.data.getBoolean(spy.getName() + ".adm.spy")) {
-                            formatMessage = format.getString("plugin.format.commands.access.me.spy")
+                            formatMessage = cmdf.C2T(format, "plugin.format.commands.access.me.spy")
                                     .replace(":name:", p.getName())
                                     .replace(":message:", message)
                                     .replace(":displayname:", display);
-                            formatMessage = ChatColor.translateAlternateColorCodes('&', formatMessage);
+                            if (se.hasPermission("chat.color")){
+                                formatMessage = ChatColor.translateAlternateColorCodes('&',formatMessage);
+                            }
                             spy.sendMessage(formatMessage);
 
                         }

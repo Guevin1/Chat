@@ -3,20 +3,21 @@ package guevin1.chat;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
-import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.*;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static org.bukkit.Sound.valueOf;
+
 public class cmdf {
     public static Component hex(String message){
-        String format = "(.*?(?=&#|$))|(&#[a-f,A-F,0-9]{3,6}.*?(&r|$))";
-        String formatHEX= "#[a-z,A-Z,0-9]{3,6}";
+        String format = "&#[0-9A-Za-z]{6}.*?(?=&)|.*?(?=&#|!=&r|$)";
+        String formatHEX= "&?#[a-z,A-Z,0-9]{3,6}";
         Matcher matcher = Pattern.compile(format).matcher(message);
         Component text = Component.text("");
         while (matcher.find()){
@@ -60,18 +61,27 @@ public class cmdf {
         for (String sub : main.message.getStringList("plugin.format.sub.mentoin.format")) {
             String ment = main.message.getString("plugin.format.sub.mentoin.message");
             for (Player p : Bukkit.getOnlinePlayers()) {
-                ment = ment.replace(":name:", p.getName());
-                sub = sub.replace(":name:", p.getName());
-            }
-            if (message.contains(sub)) {
-                ment = placeholder(pl,ment);
-                text = text.replace(sub, ment);
+                String mentc = ment.replace(":name:", p.getName());
+                String subc = sub.replace(":name:", p.getName());
+                Location loc = p.getLocation();
+                Bukkit.getLogger().info(subc);
+                if (message.contains(subc)) {
+                    ment =ChatColor.translateAlternateColorCodes('&',placeholder(pl,mentc));
+                    String soC = main.message.getString("plugin.format.sub.mentoin.sound.name");
+                    Float svC = (float) main.message.getDouble("plugin.format.sub.mentoin.sound.volume");
+                    Float sv = (svC == null) ? 0.5f : svC;
+                    Sound so = (soC == null) ? Sound.valueOf("block_bell_use".toUpperCase()) : Sound.valueOf(soC.toUpperCase());
 
+                    p.playSound(loc, so,0.1f, 0.1f);
+                    text = text.replace(subc, ment);
+
+                }
             }
+
         }
         return text;
     }
-    public static Component HoverPlayer(List<String> list,Player p){
+    public static Component HoverPlayer(List<String> list, Player p){
         Component text = Component.text("");
         for(String i : list){
             i = placeholder(p,i);
@@ -81,12 +91,16 @@ public class cmdf {
         return text;
     }
 
-    public static Component HoverPlayer(List<String> list,Player p,Player pl){
+    public static Component HoverPlayerL(List<String> list,Player p,Player pl){
         Component text = Component.text("");
         for(String i : list){
             i = placeholder(p,i);
             i = ChatColor.translateAlternateColorCodes('&', i);
-            i = i.replace(":blocks:",String.valueOf(p.getLocation().distance(pl.getLocation())));
+            String y = String.format("%.1f",p.getLocation().distance(pl.getLocation()));
+            if(pl.getWorld().getUID() != p.getWorld().getUID()){
+                i = "??";
+            }
+            i = i.replace(":blocks:",y);
             text = text.append(Component.text(i));
 
         }
@@ -98,5 +112,38 @@ public class cmdf {
             text = PlaceholderAPI.setPlaceholders(pl,message);
         }
         return text;
+    }
+    public static String C2T(FileConfiguration config, String path){
+        Object textC = config.get(path);
+        String text = "";
+
+        if (textC != null) {
+            if (textC instanceof String) {
+                text = ChatColor.translateAlternateColorCodes('&', textC.toString());
+
+            } else if (textC instanceof List) {
+                for (Object run : ((List<?>) textC).toArray()) {
+                    text = text + run.toString()+"\n";
+                    Bukkit.getLogger().info(run.toString());
+                }
+
+                text = ChatColor.translateAlternateColorCodes('&', text);
+
+            }
+        }else {
+            Bukkit.getLogger().info(path);
+            text = ChatColor.RED + "NULL";
+        }
+        return text;
+    }
+    public static String SA2S(int index,String[] args){
+        String message = "";
+        for(int ml = index;ml <= args.length-1; ml++){
+            message = message + args[ml] + " ";
+        }
+        return message;
+    }
+    public static void ce(Object i){
+        Bukkit.getLogger().info(i.toString());
     }
 }

@@ -38,9 +38,10 @@ plugin:
           to: "&b Для&r :name:::message:"
           from: "&b От&r :name:::message:"
           spy: "&b От &r:name:&b Для &r:name2:: :message:"
+          click: "/w :name:"
         do: "&i:name: :message:"
         spy:
-          text: "&a spy :spy:" # :spy: это режим
+          text: "&aspy :spy:" # :spy: это режим
           true: "вкл"
           false: "выкл"
       errors:
@@ -50,8 +51,29 @@ plugin:
           arg-message: "&c Напишите сообщение"
           arg-online: "&c Человек либо вне сети либо нету"
         do-arg: "&c не хватает аргументов"
+    groups:
+      help:
+        - "помощь"
+        - "test"
+      errors:
+        group-not: "&cВас нету в группе :nameG:"
+        group-owner-l: "&cВы Владелец Группы :nameG: вы не можете выйти вы можете удалить группу"
+      sub:
+        list:
+          - "Все группы"
+          - ":groups:"
 
+      accept:
+        group-leave: "&aВы вышли из :nameG:"
+        chat:
+          message: "&7 [group #:idG:] :name:: :message:" # :idG: - айди группы, :nameG: - название группы
+          hover:
+          - "&7 group: :idG:/:nameG:"
+          - "Увидели: :viewers:" # :viewers; - кто увидел это сообщение
     sub:
+      format:
+        groups-l: "&7-&r :nameG:" # :nameG: - Имя группы
+        groups-v: "&7-&r :name:" # :name: - Имя человека кто увидел это сообщение
       loc:
         format:
           - ":loc:"
@@ -63,3 +85,5 @@ plugin:
           - "@:name:"
           - ":name:"
         message: "&a@:name:&r"
+        sound:
+          name: "block_bell_use" # вместо . в команде /playsound ставить _ а и да уберите ещё 'minecraft:'

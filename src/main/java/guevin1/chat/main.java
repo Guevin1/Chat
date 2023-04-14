@@ -1,8 +1,10 @@
 package guevin1.chat;
 
+import guevin1.chat.Tab.groupsTab;
 import guevin1.chat.cmd.spy;
 import guevin1.chat.cmd.w;
 import guevin1.chat.cmd.mes;
+import guevin1.chat.cmd.groups;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -15,15 +17,18 @@ public final class main extends JavaPlugin {
     public static File configFile;
     public static File messageFile;
     public static File dataFile;
+    public static File groupFile;
 
     public static FileConfiguration config;
     public static FileConfiguration message;
     public static FileConfiguration data;
+    public static FileConfiguration group;
     @Override
     public void onEnable() {
-        messageFile = new File("plugins/Chat/message.yml");
-        configFile = new File("plugins/Chat/config.yml");
-        dataFile = new File("plugins/Chat/data.yml");
+        messageFile = new File("plugins/ChatGE/message.yml");
+        configFile = new File("plugins/ChatGE/config.yml");
+        dataFile = new File("plugins/ChatGE/data.yml");
+        groupFile = new File("plugins/ChatGE/groups/group.yml");
         getLogger().info("Включение плагина");
         Bukkit.getPluginManager().registerEvents(new handler(this),this);
         getLogger().info("конфиги: ");
@@ -39,6 +44,13 @@ public final class main extends JavaPlugin {
         }else {
             getLogger().info(" data.yml есть");
         }
+        if (!groupFile.exists()){
+            new  File("plugins/Chat/groups").mkdirs();
+            saveResource("groups/group.yml",false);
+            getLogger().info(" group.yml нету скачиваю");
+        }else {
+            getLogger().info(" group.yml есть");
+        }
         if (!configFile.exists()){
             saveDefaultConfig();
             getLogger().info(" config.yml нету скачиваю");
@@ -48,11 +60,14 @@ public final class main extends JavaPlugin {
         config = YamlConfiguration.loadConfiguration(configFile);
         message = YamlConfiguration.loadConfiguration(messageFile);
         data = YamlConfiguration.loadConfiguration(dataFile);
+        group = YamlConfiguration.loadConfiguration(groupFile);
         getCommand("w").setExecutor(new w(this));
         getCommand("msg").setExecutor(new w(this));
         getCommand("tell").setExecutor(new w(this));
         getCommand("me").setExecutor(new mes(this));
         getCommand("spy").setExecutor(new spy(this));
+        getCommand("groups").setExecutor(new groups(this));
+        getCommand("groups").setTabCompleter(new groupsTab(this));
     }
 
     @Override

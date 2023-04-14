@@ -1,5 +1,6 @@
 package guevin1.chat.cmd;
 
+import guevin1.chat.cmdf;
 import guevin1.chat.main;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -23,9 +24,8 @@ public class spy implements CommandExecutor {
                 if (!data.getBoolean(p.getName()+".adm.spy")){
                     on = true;
                 }
-                String message = format.getString("plugin.format.commands.access.spy.text");
-                String formatSpy = format.getString("plugin.format.commands.access.spy."+on);
-                message = ChatColor.translateAlternateColorCodes('&',message).replace(":spy:",formatSpy);
+                String formatSpy = cmdf.C2T(format, "plugin.format.commands.access.spy."+on);
+                String message = cmdf.C2T(format,"plugin.format.commands.access.spy.text").replace(":spy:",formatSpy);
                 se.sendMessage(message);
                 data.set(p.getName()+".adm.spy",on);
                 main.save(data,main.dataFile);
