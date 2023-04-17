@@ -28,6 +28,18 @@ public class groupsTab implements TabCompleter {
             completions.add("chat");
         }if (args.length == 2){
             switch (args[0]){
+                case("chat"):
+                    for(String key : groups.getKeys(true)){
+
+                        if (key.contains("players")){
+                            if (groups.getStringList(key).contains(sender.getName())){
+                                completions.add("["+groups.getString(key.replace("players","name"))+"]");
+                            }
+
+                        }
+                    }
+                    break;
+
                 case ("leave"):
                     for(String key : groups.getKeys(true)){
 
@@ -60,7 +72,6 @@ public class groupsTab implements TabCompleter {
                         }
                     }
                     break;
-                case("info"):
                 case("join"):
                     for(String key : groups.getKeys(true)){
                         if (key.contains("players")){

@@ -1,5 +1,5 @@
 1:
-  name: "test's group 1"
+  name: test group 1
   players:
     - "Guevin1"
     - "Dial__up"
@@ -9,7 +9,7 @@
   settings:
     send: false
 2:
-  name: "test's group 2"
+  name: test group 2
   players:
     - "Guevin1"
     - "Dial__up"
@@ -18,3 +18,4 @@
     - "Guevin1"
   settings:
     send: false
+    closed: true

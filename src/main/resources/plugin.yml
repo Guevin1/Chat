@@ -25,3 +25,18 @@ commands:
     description: groups
     permission: chatge.groups
     usage: /groups <args>
+permissions:
+  chatge.groups.chat:
+    default: true
+  chatge.groups.join:
+    default: true
+  chatge.groups.leave:
+    default: true
+  chatge.groups.create:
+    default: true
+  chatge.groups.delete:
+    default: true
+  chatge.groups.edit:
+    default: true
+  chatge.groups.list:
+    default: true

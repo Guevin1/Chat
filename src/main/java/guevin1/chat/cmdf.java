@@ -6,7 +6,6 @@ import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -137,9 +136,13 @@ public class cmdf {
         return text;
     }
     public static String SA2S(int index,String[] args){
+        String mess = SA2S(index,args," ");
+        return mess;
+    }
+    public static String SA2S(int index, String[] args, String space){
         String message = "";
         for(int ml = index;ml <= args.length-1; ml++){
-            message = message + args[ml] + " ";
+            message = message + args[ml] + space;
         }
         return message;
     }

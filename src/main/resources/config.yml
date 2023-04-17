@@ -5,7 +5,7 @@ plugin:
     radius: 100
     sis: true # SPY это видет?
   rp:
-    prefix: "?"
+    prefix: ";"
     chat:
       radius: 25
       sis: false # SPY это видет?

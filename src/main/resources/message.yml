@@ -52,24 +52,31 @@ plugin:
           arg-online: "&c Человек либо вне сети либо нету"
         do-arg: "&c не хватает аргументов"
     groups:
-      help:
-        - "помощь"
-        - "test"
       errors:
         group-not: "&cВас нету в группе :nameG:"
         group-owner-l: "&cВы Владелец Группы :nameG: вы не можете выйти вы можете удалить группу"
+        perm: "&cУ вас нет прав"
+        group-join-no-ticket: "&cВ группу :nameG: нельзя вступить" # Сообщение при закрытой группе
+        group-join-ticket: "&cВы подали заявку в группу :nameG:" # Подача заявки в закрытую группу
+        group-join-cancel: "&cВы уже состоите в группе :nameG:" # Человек уже состоит в группе
+        group-chat-notext: "&cНапишите команду либо /groups chat <group name> <message> или в /groups chat <group name>" # человек отправил /groups chat
+        group-chat-noactive: "&cВыберите Активную группу через команду либо /groups chat <group name> и потом /groups chat [message] либо /groups chat <group name> [message]" # не обезательно каждый раз писать /groups chat <group name> [message] можно будет писать либо /groups chat [message] или ,[message]
       sub:
-        list:
+        help: # Команда /groups
+          - "помощь"
+          - "test"
+        list: # Команда /groups list
           - "Все группы"
           - ":groups:"
-
+        chat:
+          message: "&7 [:nameG:] :name:: :message:" # :nameG: - название группы, :name: - Имя игрока, :message: - Сообщение
+          hover:
+            - "&7 Группа #:idG:\n"
+            - "&7 Увидели: :viewers:" # :viewers; - кто увидел это сообщение
+          click: "/groups chat :nameG:"
       accept:
         group-leave: "&aВы вышли из :nameG:"
-        chat:
-          message: "&7 [group #:idG:] :name:: :message:" # :idG: - айди группы, :nameG: - название группы
-          hover:
-          - "&7 group: :idG:/:nameG:"
-          - "Увидели: :viewers:" # :viewers; - кто увидел это сообщение
+        group-join: "&aВы вступили в группу :nameG:"
     sub:
       format:
         groups-l: "&7-&r :nameG:" # :nameG: - Имя группы

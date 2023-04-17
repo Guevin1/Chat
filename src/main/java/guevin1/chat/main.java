@@ -45,7 +45,6 @@ public final class main extends JavaPlugin {
             getLogger().info(" data.yml есть");
         }
         if (!groupFile.exists()){
-            new  File("plugins/Chat/groups").mkdirs();
             saveResource("groups/group.yml",false);
             getLogger().info(" group.yml нету скачиваю");
         }else {
